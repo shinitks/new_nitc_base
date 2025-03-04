@@ -147,6 +147,7 @@ int retVal=BlockAccess::insert(RELCAT_RELID,relCatRecord);
         strcpy(attrCatRecord[ATTRCAT_REL_NAME_INDEX].sVal,relName);
         strcpy(attrCatRecord[ATTRCAT_ATTR_NAME_INDEX].sVal,attrs[attrIndex]);
         attrCatRecord[ATTRCAT_ATTR_TYPE_INDEX].nVal=attrtype[attrIndex];
+        //printf("typeschema=%d,%d\n",attrCatRecord[ATTRCAT_ATTR_TYPE_INDEX].nVal,attrtype[attrIndex]);
         attrCatRecord[ATTRCAT_PRIMARY_FLAG_INDEX].nVal=-1;
         attrCatRecord[ATTRCAT_ROOT_BLOCK_INDEX].nVal=-1;
         attrCatRecord[ATTRCAT_OFFSET_INDEX].nVal=attrIndex;
