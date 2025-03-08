@@ -75,7 +75,7 @@ for (int i = 0, blockMapslot = 0; i < 4; i++) {
     }
 }
 
-/*int StaticBuffer::getStaticBlockType(int blockNum) {
+int StaticBuffer::getStaticBlockType(int blockNum) {
     // Step 1: Validate blockNum
     if (blockNum <= 0 || blockNum >= DISK_BLOCKS) {
         // Return an error code if blockNum is out of bounds
@@ -89,7 +89,7 @@ for (int i = 0, blockMapslot = 0; i < 4; i++) {
     return static_cast<int>(blockType);  // Assuming blockAllocMap holds block types as unsigned chars
 }
 
-int StaticBuffer::setDirtyBit(int blockNum) {
+/*int StaticBuffer::setDirtyBit(int blockNum) {
     // Step 1: Find the buffer index corresponding to the block using getBufferNum
     int bufferNum = getBufferNum(blockNum);
 

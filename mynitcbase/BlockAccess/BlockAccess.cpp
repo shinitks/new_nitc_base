@@ -288,7 +288,7 @@ int BlockAccess::renameAttribute(char relName[ATTR_SIZE],
   
   return SUCCESS;}
 
-
+//STAGE 7
 
 int BlockAccess::insert(int relId, Attribute *record) {
   RelCatEntry relCatEntry;
@@ -490,11 +490,19 @@ int BlockAccess::search(int relId, Attribute *record, char attrName[ATTR_SIZE],
                         Attribute attrVal, int op) {
   // Declare a variable called recid to store the searched record
   RecId recId;
+
+  AttrCatEntry attrcatentry;
+  AttrCacheTable::getAttrCatEntry(relId,attrName,&attrcatentry);
+  int rootblock=attrcatentry.rootBlock;
+  printf("rootblock=%d\n",rootblock);
+  if(rootblock==-1){
   recId = BlockAccess::linearSearch(relId, attrName, attrVal, op);
 
-  /* search for the record id (recid) corresponding to the attribute with
-  attribute name attrName, with value attrval and satisfying the condition op
-  using linearSearch() */
+  }
+  else{
+    recId=BPlusTree::bPlusSearch(relId,attrName,attrVal,op);
+  }
+
   if (recId.block == -1 and recId.slot == -1)
     return E_NOTFOUND;
 
@@ -502,6 +510,7 @@ int BlockAccess::search(int relId, Attribute *record, char attrName[ATTR_SIZE],
   //    return E_NOTFOUND;
   RecBuffer recBuffer(recId.block);
   int ret = recBuffer.getRecord(record, recId.slot);
+  
   if (ret != SUCCESS)
     return ret;
   /* Copy the record with record id (recId) to the record buffer (record)
@@ -712,6 +721,7 @@ int BlockAccess::deleteRelation(char relName[ATTR_SIZE]) {
     return SUCCESS;
 }
 
+//STAGE 9
 
 int BlockAccess::project(int relId, Attribute *record) {
     // get the previous search index of the relation relId from the relation
