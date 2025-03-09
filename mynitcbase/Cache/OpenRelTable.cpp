@@ -462,6 +462,8 @@ relCacheEntry->recId.block = relcatRecId.block;
     strcpy(OpenRelTable::tableMetaInfo[relId].relName, (char*)relName);
     return relId; // Return the relation ID
 }
+
+
 int OpenRelTable::closeRel(int relId) {
   // Check if relId corresponds to a relation catalog or attribute catalog
   if (relId == RELCAT_RELID|| relId == ATTRCAT_RELID) {
@@ -472,6 +474,11 @@ int OpenRelTable::closeRel(int relId) {
   if (relId < 0 || relId >= MAX_OPEN) {
     return E_OUTOFBOUND;  // Invalid relId
   }
+
+   if(RelCacheTable::relCache[relId]== nullptr) {
+    return E_RELNOTOPEN;
+  }
+
 if (RelCacheTable::relCache[relId] && RelCacheTable::relCache[relId]->dirty) {
         Attribute relCatBuffer[RELCAT_NO_ATTRS];
 
@@ -493,6 +500,13 @@ if (RelCacheTable::relCache[relId] && RelCacheTable::relCache[relId]->dirty) {
     // Free attribute cache linked list safely
     AttrCacheEntry *head = AttrCacheTable::attrCache[relId];
     while (head) {
+      if(head->dirty){
+        Attribute attrCatRecord [ATTRCAT_NO_ATTRS];
+			AttrCacheTable::attrCatEntryToRecord(&(head->attrCatEntry), attrCatRecord);
+
+			RecBuffer attrCatBlockBuffer (head->recId.block);
+			attrCatBlockBuffer.setRecord(attrCatRecord, head->recId.slot);
+      }
         AttrCacheEntry *next = head->next;
         free(head);
         head = next;
@@ -513,6 +527,8 @@ if (RelCacheTable::relCache[relId] && RelCacheTable::relCache[relId]->dirty) {
 
   return SUCCESS;  // Successfully closed the relation
 }
+
+
 // OpenRelTable::~OpenRelTable() {
 //   // Close all open relations from rel-id = 2 onwards
 //   for (int i = 2; i < MAX_OPEN; ++i) {
@@ -535,6 +551,8 @@ if (RelCacheTable::relCache[relId] && RelCacheTable::relCache[relId]->dirty) {
 //   RelCacheTable::relCache[1] = nullptr;
 //   AttrCacheTable::attrCache[1] = nullptr;
 // }
+
+
 OpenRelTable::~OpenRelTable()
 {
 	// free all the memory that you allocated in the constructor
