@@ -523,7 +523,6 @@ int BlockAccess::search(int relId, Attribute *record, char attrName[ATTR_SIZE],
   AttrCatEntry attrcatentry;
   AttrCacheTable::getAttrCatEntry(relId,attrName,&attrcatentry);
   int rootblock=attrcatentry.rootBlock;
-  printf("rootblock=%d\n",rootblock);
   if(rootblock==-1){
   recId = BlockAccess::linearSearch(relId, attrName, attrVal, op);
 
@@ -766,11 +765,13 @@ int BlockAccess::project(int relId, Attribute *record) {
     // slot we need to check.
     int block, slot;
 
+
     /* if the current search index record is invalid(i.e. = {-1, -1})
        (this only happens when the caller reset the search index)
     */
     if (prevRecId->block == -1 && prevRecId->slot == -1)
-    {
+    {          
+
         RelCatEntry* relCatBuf=(RelCatEntry*)malloc(sizeof(RelCatEntry));
       RelCacheTable::getRelCatEntry(relId,relCatBuf);
         // block = first record block of the relation
@@ -779,7 +780,8 @@ int BlockAccess::project(int relId, Attribute *record) {
         slot=0;
     }
     else
-    {
+    {        
+
         block=prevRecId->block;
         slot=prevRecId->slot+1;
     }
@@ -790,30 +792,37 @@ int BlockAccess::project(int relId, Attribute *record) {
        records of the relation */
     while (block != -1)
     {
+                 
          RecBuffer RecBuffer(block);
 
           Attribute rec[RELCAT_NO_ATTRS];
-
         // get the record with id (block, slot) using RecBuffer::getRecord()
         RecBuffer.getRecord(rec,slot);
-        // get header of the block using RecBuffer::getHeader() function
-        HeadInfo header;
-        RecBuffer.getHeader(&header);
-        // get slot map of the block using RecBuffer::getSlotMap() function
-        unsigned char slotMap[SLOTMAP_SIZE_RELCAT_ATTRCAT];
-        RecBuffer.getSlotMap(slotMap);
 
-        if(slot>=header.numSlots)
+        HeadInfo header;
+
+        RecBuffer.getHeader(&header);
+
+int new_slot=slot;
+
+        unsigned char slotMap[SLOTMAP_SIZE_RELCAT_ATTRCAT];
+
+        RecBuffer.getSlotMap(slotMap);
+         
+
+        if(new_slot>=header.numSlots)
         {
+           
             block=header.rblock;
             // update slot = 0
             slot=0;
             continue;  
         }
-        else if (slotMap[slot]==SLOT_UNOCCUPIED)
+        else if (slotMap[new_slot]==SLOT_UNOCCUPIED)
         { // (i.e slot-th entry in slotMap contains SLOT_UNOCCUPIED)
 
             // increment slot
+            slot=new_slot;
             slot++;
           if (slot >= header.numSlots) {  // ensure slot is within bounds
         block = header.rblock;  // move to the next block
