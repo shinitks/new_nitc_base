@@ -43,6 +43,39 @@ NITCbase is a teaching-focused relational database management system designed to
 - g++ compiler
 - Basic RDBMS knowledge
 
-### Compilation
-```bash
-g++ -std=c++17 -o nitcbase main.cpp Disk.cpp StaticBuffer.cpp ...
+###📚 Documentation
+You are provided with:
+
+A full implementation of:
+
+Disk.cpp (physical layer)
+
+XFS Interface
+
+Frontend Interface
+
+Class stubs and algorithm specifications for each layer
+
+Tutorials and in-depth guides for complex parts (e.g., B+ trees)
+
+A detailed implementation roadmap guiding you step by step
+
+###🧑‍🏫 For Instructors
+This project is structured to maximize pedagogical value. Students gradually build up each layer, integrating both theoretical understanding and practical coding skills.
+
+Emphasizes modular understanding
+
+Encourages clean abstractions
+
+Involves ~3000 lines of C++ code upon completion
+
+###📌 Notes
+The system currently does not support concurrency
+
+The final RDBMS will be able to handle a range of SQL-like operations on a simulated disk system
+
+Focus is placed on clarity, structure, and educational value over real-world optimization
+
+###🎓 Credits
+Developed as part of the undergraduate curriculum at NIT Calicut for educational purposes.
+
