@@ -43,39 +43,35 @@ NITCbase is a teaching-focused relational database management system designed to
 - g++ compiler
 - Basic RDBMS knowledge
 
-###📚 Documentation
-You are provided with:
+## 📚 Documentation
 
-A full implementation of:
+**Provided Resources:**
+- Complete implementations:
+  - `Disk.cpp` (physical layer)
+  - XFS Interface
+  - Frontend Interface
+- Class stubs with algorithm specifications for each layer
+- In-depth tutorials for complex components (B+ trees)
+- Step-by-step implementation roadmap
 
-Disk.cpp (physical layer)
+## 🧑‍🏫 Instructor Notes
 
-XFS Interface
+**Pedagogical Structure:**
+- Progressive layer-by-layer implementation
+- Combines theoretical concepts with hands-on coding
+- Key focuses:
+  - Modular system understanding
+  - Clean abstraction design
+  - ~3000 lines of instructional C++ code
 
-Frontend Interface
+## 📌 Important Notes
 
-Class stubs and algorithm specifications for each layer
+- **No concurrency support** in current version
+- Handles SQL-like operations on simulated disk
+- Prioritizes:
+  - Educational clarity
+  - Architectural structure
+  - Learning value over production optimization
 
-Tutorials and in-depth guides for complex parts (e.g., B+ trees)
-
-A detailed implementation roadmap guiding you step by step
-
-###🧑‍🏫 For Instructors
-This project is structured to maximize pedagogical value. Students gradually build up each layer, integrating both theoretical understanding and practical coding skills.
-
-Emphasizes modular understanding
-
-Encourages clean abstractions
-
-Involves ~3000 lines of C++ code upon completion
-
-###📌 Notes
-The system currently does not support concurrency
-
-The final RDBMS will be able to handle a range of SQL-like operations on a simulated disk system
-
-Focus is placed on clarity, structure, and educational value over real-world optimization
-
-###🎓 Credits
-Developed as part of the undergraduate curriculum at NIT Calicut for educational purposes.
-
+## 🎓 Credits
+Developed for undergraduate curriculum at National Institute of Technology Calicut (NITC)
