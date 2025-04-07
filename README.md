@@ -44,6 +44,8 @@ NITCbase is a teaching-focused relational database management system designed to
 - Basic RDBMS knowledge
 
 ## 📚 Documentation
+**Complete documentation available at:**  
+[NITCbase Official Documentation](https://nitcbase.github.io/)
 
 **Provided Resources:**
 - Complete implementations:
@@ -53,16 +55,6 @@ NITCbase is a teaching-focused relational database management system designed to
 - Class stubs with algorithm specifications for each layer
 - In-depth tutorials for complex components (B+ trees)
 - Step-by-step implementation roadmap
-
-## 🧑‍🏫 Instructor Notes
-
-**Pedagogical Structure:**
-- Progressive layer-by-layer implementation
-- Combines theoretical concepts with hands-on coding
-- Key focuses:
-  - Modular system understanding
-  - Clean abstraction design
-  - ~3000 lines of instructional C++ code
 
 ## 📌 Important Notes
 
