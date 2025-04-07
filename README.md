@@ -1,4 +1,5 @@
 NITCbase
+
 A Relational Database Management System (RDBMS) Implementation Project
 📘 Introduction
 NITCbase is an academic RDBMS implementation project aimed at helping undergraduate students understand the architecture and data structures behind relational databases by building one from scratch using C++ on a Unix/Linux environment.
